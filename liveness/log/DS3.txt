@@ -1,0 +1,15 @@
+nohup: ignoring input
+Using backend: pytorch
+0
+cuda available with GPU: Tesla V100-SXM2-32GB
+current device is :  cuda:0
+[I] Loading dataset /home/qhd/code/liveness/data_generation/UPN/package_data/DS3/...
+111111111
+Traceback (most recent call last):
+  File "main.py", line 326, in <module>
+    main()    
+  File "main.py", line 294, in main
+    dataset = PackageData(data_loc, "read")
+  File "/home/qhd/code/liveness/GNN/data_process/package_data.py", line 28, in __init__
+    f1 = pickle.load(f)
+EOFError: Ran out of input
