@@ -51,7 +51,7 @@ def gpu_setup(use_gpu, gpu_id):
 import sys
 sys.path.append(r'/home/qhd/code/liveness/GNN/nets/') 
 from load_net import gnn_model
-from LSTMDGNN import LSTMDGNN
+from GRUDGNN import GRUDGNN
 
 # from data.data import LoadData # import dataset
 # from train.train_molecules_graph_regression import train_epoch, evaluate_network # import train functions
@@ -74,7 +74,7 @@ def view_model_param(MODEL_NAME, net_params):
     
     # model = gnn_model(MODEL_NAME, net_params)
 
-    model = LSTMDGNN(net_params)
+    model = GRUDGNN(net_params)
     
     print("=========")
     total_param = 0
@@ -130,7 +130,7 @@ def train_val_pipeline(MODEL_NAME, dataset, params, net_params, dirs):
     print("Test Nets: ", len(testset))
 
     # model = gnn_model(MODEL_NAME, net_params)
-    model = LSTMDGNN(net_params)
+    model = GRUDGNN(net_params)
     model = model.to(device)
     
     criterion = torch.nn.BCELoss()
@@ -277,7 +277,7 @@ def main():
     
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', help="Please give a config.json file with training/model/data/param details",
-                        default="config/LSTMDGNN.json")
+                        default="config/GRUDGNN.json")
 
     args = parser.parse_args()
     with open(args.config) as f:
@@ -292,7 +292,7 @@ def main():
 
     DATASET_NAME = config['dataset']
     data_loc = config['data_dir']
-    dataset = PackageData(data_loc, "read", "DataSet2.pkl")
+    dataset = PackageData(data_loc, "read", "FCset.pkl")
 
     dataset.name = DATASET_NAME
     out_dir = config['out_dir']
