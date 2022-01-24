@@ -28,7 +28,8 @@ def train_epoch(model, optimizer, criterion, device, data_loader, epoch):
 
     acc_score = []
     acc_target = []
-    for iter, (batch_graphs, batch_targets, name) in enumerate(data_loader): #, batch_snorm_n, batch_snorm_e
+    # for iter, (batch_graphs, batch_targets, name) in enumerate(data_loader): #, batch_snorm_n, batch_snorm_e
+    for iter, (batch_graphs, batch_targets) in enumerate(data_loader): #, batch_snorm_n, batch_snorm_e
         # batch_x = batch_graphs.ndata['feat'].to(device)  # num x feat
         # batch_e = batch_graphs.edata['feat'].to(device)
         # batch_snorm_e = batch_snorm_e.to(device)
@@ -77,7 +78,8 @@ def evaluate_network(model, device, criterion, data_loader, epoch):
     with torch.no_grad():
         acc_score = []
         acc_target = []
-        for iter, (batch_graphs, batch_targets, name) in enumerate(data_loader):
+        # for iter, (batch_graphs, batch_targets, name) in enumerate(data_loader):
+        for iter, (batch_graphs, batch_targets) in enumerate(data_loader):
             # batch_x = batch_graphs.ndata['feat'].to(device)
             # batch_e = batch_graphs.edata['feat'].to(device)
             # batch_snorm_e = batch_snorm_e.to(device)

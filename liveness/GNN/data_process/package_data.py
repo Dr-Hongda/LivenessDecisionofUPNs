@@ -51,7 +51,8 @@ class PackageData(torch.utils.data.Dataset):
 
     def collate(self, samples):
         # The input samples is a list of pairs (graph, label).
-        graphs, labels, name = map(list, zip(*samples))
+        # graphs, labels, name = map(list, zip(*samples))
+        graphs, labels = map(list, zip(*samples))
     
         labels = torch.tensor(np.array(labels)).unsqueeze(1)
 
@@ -62,8 +63,8 @@ class PackageData(torch.utils.data.Dataset):
         # print("=========")
         # print(batched_graph)
         # print(labels)
-
-        return batched_graph, labels, name
+        # return batched_graph, labels, name
+        return batched_graph, labels
 
 
 def write_file(path, name):
