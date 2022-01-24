@@ -1,0 +1,41 @@
+{
+    "gpu": {
+        "use": true,
+        "id": 0
+    },
+    
+    "model": "GRUDGNN",
+    "dataset": "DataSet1",
+    "data_dir" : "/home/qhd/code/liveness/data_generation/UPN/package_data/FCDS/",
+    "out_dir": "/home/qhd/code/liveness/data_generation/UPN/package_data/FCDS/",
+    
+    "params": {
+        "seed": 20,
+        "epochs": 100,
+        "batch_size": 1,
+        "init_lr": 0.0001,
+        "lr_reduce_factor": 0.5,
+        "lr_schedule_patience": 5,
+        "min_lr": 0.0,
+        "weight_decay": 0.001,
+        "print_epoch_interval": 5,
+        "max_time": 48
+    },
+    
+    "net_params": {
+        "L": 3,
+        "node_in_dim" : 210,
+        "edge_in_dim" : 1,
+        "edge_f" : true,
+        "dst_f" : true,
+        "r_dim" : 128,
+        "h_dim" : 32,
+        "residual": true,
+        "readout": "mean",
+        "in_feat_dropout": 0.4,
+        "dropout": 0.5,
+        "graph_norm": false,
+        "batch_norm": false,
+        "self_loop": true
+    }
+}
