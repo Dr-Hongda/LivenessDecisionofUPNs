@@ -17,12 +17,10 @@ from ArrivableGraph import get_arr_gra
 def StrongDirectedGraph(node_num, flag, path):
     G = nx.DiGraph()
 
-    #生成自环
     list = [i for i in range(1, node_num + 1)]
     # print(list)
     nx.add_cycle(G, list)
 
-    #生成随意连接
     random_directed = int(np.random.randint(0, node_num / 2, size =1))
 
     for i in range(random_directed):
@@ -49,18 +47,15 @@ def obtain_matrix_and_M0(G):
 
     i = 0
     for edge in G.edges:
-        #获取index
         row = i
         col1 = int(edge[0] - 1)
         col2 = int(edge[1] - 1)
         
-        #获取矩阵
         A2[row][col1] = 1
         A1[row][col2] = 1
         
         i += 1
     
-    #配置M0
     M0 = np.zeros((1,len_p))
     flag = int(np.random.randint(0, len_p, size = 1))
     M0[0][flag] = 1
@@ -80,7 +75,6 @@ def add_transition_UPN(matrix, index):
     colums2 = np.zeros(len_p)
     colums2[index] = 1
 
-    #插入新变迁的两列（库所为行）
     a = np.insert(matrix, insert, values = colums1, axis = 1)
     b = np.insert(a, -1, values = colums2, axis = 1)
 
@@ -123,7 +117,6 @@ def plot_arri_gra(v_list, edage_list, arctrans_list, loc):
     except Exception:
         return
 
-
 def plot_petri(petri_gra, loc):
     dot = graphviz.Digraph(format='png')
     data = petri_gra
@@ -164,7 +157,6 @@ def plot_petri(petri_gra, loc):
     
     dot.render(loc)
     
-
 if __name__ == '__main__':
     
     graph_path =  '/home/qhd/code/liveness/data_generation/UPN/Tnet/UPN_graph/'
@@ -177,24 +169,21 @@ if __name__ == '__main__':
         with tqdm(range(iteration)) as t:
             for i in t:
                 t.set_description('Epoch %d' % i)
-                #获取强连通图
+                
                 sdg_num = int(np.random.randint(5, 201, size =1))
                 G = StrongDirectedGraph(sdg_num, i, graph_path)
-                #转换成Petri网
+                
                 matrix = obtain_matrix_and_M0(G)
                 add_transition_index = int(np.random.randint(1, sdg_num, size =1))
                 upn_matrix = transform_UPN(matrix, add_transition_index)
                 write_UPN_matrix(upn_matrix, i, matrix_path)
 
-                #输出Petri网图
                 new_path =  graph_path + "TN" + str(i + 1) + ".gv"
                 # print(new_path)
                 plot_petri(upn_matrix, loc = new_path)
 
-                #输出可达图
                 dict_Petri = {}
                 dict_Petri['matrix'] = upn_matrix.tolist()
-                #label随时改
                 dict_Petri['liveness'] = 1
                     
                 times_per_PN = 10
@@ -211,8 +200,7 @@ if __name__ == '__main__':
         print('-' * 89)
         print('Exiting from transform early because of KeyboardInterrupt')
 
-    
-    
+
     
     
    
